@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Events Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .event {
+            width: 300px;
+            height: 200px;
+            margin: 15px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        .event:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .event p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="event" id="clickEvent">Click Me</div>
+    <div class="event" id="dblClickEvent">Double Click Me</div>
+
+    <div class="event" id="blurEvent">
+        <input type="text" placeholder="Blur Me" id="blurInput" style="padding: 5px; border: none; border-radius: 5px;">
+    </div>
+    <div class="event" id="keyPressEvent">Press Any Key</div>
+    <div class="event" id="scrollEvent">Scroll Down</div>
+    <div class="event" id="resizeEvent">Resize Window</div>
+    <div class="event" id="mouseMoveEvent">Move Your Mouse</div>
+    <div class="event" id="mouseDownEvent">Hold Mouse Button</div>
+    <div class="event" id="mouseUpEvent">Release Mouse Button</div>
+    <div class="event" id="dragEvent">Drag Me</div>
+    <div class="event" id="dropEvent">Drop Here</div>
+    <div class="event" id="hoverEvent">Hover Over Me</div>
+    <div class="event" id="changeEvent">
+        
+        <select id="changeSelect" style="padding: 5px; border: none; border-radius: 5px;">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+    </div>
+    <div class="event" id="submitEvent">
+        <form id="submitForm">
+            <button type="submit" style="padding: 5px 10px; border: none; border-radius: 5px;">Submit</button>
+        </form>
+    </div>
+    <div class="event" id="focusEvent">
+        <input type="text" placeholder="Focus here" id="focusInput" style="padding: 5px; border: none; border-radius: 5px;">
+    </div>
+
+    <script>
+        document.getElementById('clickEvent').addEventListener('click', () => {
+            alert('You clicked the box!');
+        });
+        document.getElementById('dblClickEvent').addEventListener('dblclick', () => {
+            alert('You double-clicked the box!');
+        });
+        document.getElementById('hoverEvent').addEventListener('mouseover', () => {
+            alert('You hovered over the box!');
+        });
+        document.getElementById('focusInput').addEventListener('focus', () => {
+            alert('Input is focused!');
+
+        });
+        document.getElementById('blurInput').addEventListener('blur', () => {
+            alert('Input lost focus!');
+        });
+        document.addEventListener('keypress', (e) => {
+            document.getElementById('keyPressEvent').innerText = `Key Pressed: ${e.key}`;
+        });
+        window.addEventListener('scroll', () => {
+            document.getElementById('scrollEvent').innerText = 'You scrolled!';
+        });
+        window.addEventListener('resize', () => {
+            document.getElementById('resizeEvent').innerText = 'Window resized!';
+        });
+        document.addEventListener('mousemove', (e) => {
+            document.getElementById('mouseMoveEvent').innerText = `Mouse Position: (${e.clientX}, ${e.clientY})`;
+        });
+        document.addEventListener('mousedown', () => {
+            document.getElementById('mouseDownEvent').innerText = 'Mouse Button Down!';
+        });
+        document.addEventListener('mouseup', () => {
+            document.getElementById('mouseUpEvent').innerText = 'Mouse Button Released!';
+        });
+        const dragEvent = document.getElementById('dragEvent');
+        dragEvent.draggable = true;
+        dragEvent.addEventListener('dragstart', () => {
+            alert('Drag started!');
+        });
+        const dropEvent = document.getElementById('dropEvent');
+        dropEvent.addEventListener('dragover', (e) => e.preventDefault());
+        dropEvent.addEventListener('drop', () => {
+            alert('Dropped!');
+        });
+        document.getElementById('changeSelect').addEventListener('change', (e) => {
+            alert(`You selected: ${e.target.value}`);
+        });
+        document.getElementById('submitForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Form Submitted!');
+        });
+    </script>
+</body>
+</html>
